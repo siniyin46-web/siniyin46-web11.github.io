@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>临江仙·梦后楼台高锁 - 晏几道</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@300;400;600;700&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --ink: #2c2416;
+    --ink-light: #6b5e4a;
+    --paper: #f5f0e6;
+    --paper-dark: #e8dcc8;
+    --seal: #c44240;
+    --gold: #a68b5b;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
+    background: #f5f0e6;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* === 主画心 === */
+  .painting {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(139,119,90,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 60%, rgba(139,119,90,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 40% 85%, rgba(139,119,90,0.07) 0%, transparent 50%),
+      linear-gradient(175deg, #f7f2e8 0%, #f3ecdd 30%, #efe7d4 60%, #f2ebd9 100%);
+    border-radius: 0;
+    box-shadow: inset 0 0 120px rgba(139,119,90,0.05);
+    padding: 50px 32px 44px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* 纸纹纹理 */
+  .painting::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139,119,90,0.03) 2px, rgba(139,119,90,0.03) 3px),
+      repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(139,119,90,0.02) 3px, rgba(139,119,90,0.02) 4px);
+    z-index: 0;
+  }
+
+  .painting::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(160,130,90,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(160,130,90,0.05) 0%, transparent 35%);
+    z-index: 0;
+  }
+
+  .painting > * { position: relative; z-index: 1; }
+
+  /* === 内容居中容器 === */
+  .painting-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(60px, 14vh, 160px) 28px clamp(50px, 10vh, 120px);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .painting-content > * {
+    pointer-events: auto;
+  }
+
+  /* === 顶部水墨山水 === */
+  .ink-mountains-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: clamp(100px, 16vh, 180px);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .ink-mountains-top svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .mountain {
+    animation: mountainRise 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .mountain:nth-child(1) { animation-delay: 0.1s; }
+  .mountain:nth-child(2) { animation-delay: 0.3s; }
+  .mountain:nth-child(3) { animation-delay: 0.5s; }
+  .mountain:nth-child(4) { animation-delay: 0.7s; }
+
+  @keyframes mountainRise {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* === 词牌名 === */
+  .cipai {
+    text-align: center;
+    margin-bottom: 4px;
+    width: 100%;
+  }
+
+  .cipai-main {
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'KaiTi', 'KaiTi SC', cursive;
+    font-size: 38px;
+    color: var(--ink);
+    letter-spacing: 10px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.08);
+    animation: inkSpread 1.5s ease-out both;
+    animation-delay: 0.6s;
+  }
+
+  .cipai-sub {
+    font-family: 'Noto Serif SC', 'STSong', 'Songti SC', serif;
+    font-size: 14px;
+    color: var(--ink-light);
+    letter-spacing: 6px;
+    margin-top: 4px;
+    animation: inkSpread 1.5s ease-out both;
+    animation-delay: 0.8s;
+  }
+
+  @keyframes inkSpread {
+    from { opacity:0; filter:blur(8px); letter-spacing:20px; }
+    to   { opacity:1; filter:blur(0); letter-spacing:10px; }
+  }
+
+  @keyframes inkSpreadSub {
+    from { opacity:0; filter:blur(6px); letter-spacing:16px; }
+    to   { opacity:1; filter:blur(0); letter-spacing:6px; }
+  }
+
+  /* === 作者 === */
+  .author {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .author-text {
+    font-family: 'Noto Serif SC', 'STKaiti', 'KaiTi', serif;
+    font-size: 13px;
+    color: var(--ink-light);
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 1s forwards;
+  }
+
+  .author-text .dot {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--ink-light);
+    border-radius: 50%;
+    margin: 0 8px;
+    vertical-align: middle;
+    opacity: 0.5;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(8px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* === 分隔线 === */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 1.15s forwards;
+  }
+
+  .divider-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .divider-diamond {
+    width: 5px; height: 5px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.5;
+  }
+
+  /* === 词文主体 === */
+  .poem {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 28px;
+    line-height: 2.3;
+  }
+
+  .poem-line {
+    font-family: 'Noto Serif SC', 'STKaiti', 'KaiTi', 'KaiTi SC', serif;
+    font-size: 17px;
+    font-weight: 350;
+    color: var(--ink);
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: verseReveal 1s ease-out forwards;
+    text-indent: 0;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  /* 上阕 */
+  .poem-line:nth-child(1)  { animation-delay:1.3s; }
+  .poem-line:nth-child(2)  { animation-delay:1.5s; }
+  .poem-line:nth-child(3)  { animation-delay:1.7s; }
+  .poem-line:nth-child(4)  { animation-delay:1.9s; }
+  .poem-line:nth-child(5)  { animation-delay:2.1s; }
+
+  /* 下阕 */
+  .poem-line:nth-child(6)  { animation-delay:2.6s; }
+  .poem-line:nth-child(7)  { animation-delay:2.8s; }
+  .poem-line:nth-child(8)  { animation-delay:3.0s; }
+  .poem-line:nth-child(9)  { animation-delay:3.2s; }
+  .poem-line:nth-child(10) { animation-delay:3.4s; }
+
+  /* 断句 */
+  .stanza-break {
+    height: 18px;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 2.35s forwards;
+  }
+
+  @keyframes verseReveal {
+    0%   { opacity:0; transform:translateY(14px); filter:blur(4px); }
+    60%  { opacity:0.95; transform:translateY(-1px); filter:blur(0); }
+    100% { opacity:0.88; transform:translateY(0); filter:blur(0); }
+  }
+
+  /* 名句高亮 */
+  .poem-line.famous {
+    color: #1a1008;
+    font-weight: 500;
+    letter-spacing: 4px;
+    position: relative;
+  }
+
+  .poem-line.famous::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,66,64,0.3), transparent);
+    animation: underlineReveal 1.2s ease-out 2.8s forwards;
+  }
+
+  @keyframes underlineReveal {
+    to { width:70%; }
+  }
+
+  /* === 印章 === */
+  .seal {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 3.8s forwards;
+  }
+
+  .seal-stamp {
+    width: 48px;
+    height: 48px;
+    border: 1.8px solid var(--seal);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(8deg);
+    position: relative;
+  }
+
+  .seal-stamp::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 0.6px solid rgba(196,66,64,0.4);
+    border-radius: 2px;
+  }
+
+  .seal-text {
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'KaiTi', serif;
+    font-size: 16px;
+    color: var(--seal);
+    letter-spacing: 1px;
+    writing-mode: vertical-rl;
+  }
+
+  /* === 底部水墨 === */
+  .ink-mountains-bot {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: clamp(70px, 10vh, 120px);
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 2s forwards;
+    z-index: 1;
+  }
+
+  .ink-mountains-bot svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* === 飘落花瓣 === */
+  .petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    top: -30px;
+    animation: petalFall linear infinite;
+  }
+
+  .petal:nth-child(1)  { left:3%;  animation-duration:11s; animation-delay:0s; }
+  .petal:nth-child(2)  { left:10%; animation-duration:13s; animation-delay:2s; }
+  .petal:nth-child(3)  { left:18%; animation-duration:10s; animation-delay:5s; }
+  .petal:nth-child(4)  { left:25%; animation-duration:14s; animation-delay:1s; }
+  .petal:nth-child(5)  { left:32%; animation-duration:12s; animation-delay:4s; }
+  .petal:nth-child(6)  { left:40%; animation-duration:15s; animation-delay:0.5s; }
+  .petal:nth-child(7)  { left:48%; animation-duration:11s; animation-delay:3s; }
+  .petal:nth-child(8)  { left:55%; animation-duration:13s; animation-delay:6s; }
+  .petal:nth-child(9)  { left:62%; animation-duration:10s; animation-delay:1.5s; }
+  .petal:nth-child(10) { left:70%; animation-duration:14s; animation-delay:4.5s; }
+  .petal:nth-child(11) { left:78%; animation-duration:12s; animation-delay:2.5s; }
+  .petal:nth-child(12) { left:85%; animation-duration:15s; animation-delay:0s; }
+  .petal:nth-child(13) { left:92%; animation-duration:11s; animation-delay:3.5s; }
+  .petal:nth-child(14) { left:15%; animation-duration:16s; animation-delay:7s; }
+  .petal:nth-child(15) { left:58%; animation-duration:9s;  animation-delay:5.5s; }
+  .petal:nth-child(16) { left:35%; animation-duration:17s; animation-delay:8s; }
+  .petal:nth-child(17) { left:88%; animation-duration:13s; animation-delay:6.5s; }
+  .petal:nth-child(18) { left:50%; animation-duration:12s; animation-delay:1s; }
+  .petal:nth-child(19) { left:22%; animation-duration:14s; animation-delay:3s; }
+  .petal:nth-child(20) { left:68%; animation-duration:11s; animation-delay:7.5s; }
+
+  @keyframes petalFall {
+    0%   { transform:translateY(-5vh) translateX(0) rotate(0deg) scale(1); opacity:0; }
+    8%   { opacity:0.7; }
+    15%  { transform:translateY(15vh) translateX(30px) rotate(72deg) scale(0.95); opacity:0.65; }
+    35%  { transform:translateY(35vh) translateX(-20px) rotate(180deg) scale(0.9); opacity:0.55; }
+    55%  { transform:translateY(55vh) translateX(40px) rotate(260deg) scale(0.8); opacity:0.4; }
+    75%  { transform:translateY(75vh) translateX(-15px) rotate(330deg) scale(0.7); opacity:0.2; }
+    90%  { transform:translateY(92vh) translateX(10px) rotate(380deg) scale(0.6); opacity:0.06; }
+    100% { transform:translateY(105vh) translateX(0) rotate(420deg) scale(0.5); opacity:0; }
+  }
+
+  /* === 双燕 === */
+  .swallows {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+  }
+
+  .swallow {
+    position: absolute;
+    animation: swallowFly 18s ease-in-out infinite;
+  }
+
+  .swallow svg {
+    width: 36px;
+    height: auto;
+    opacity: 0.35;
+  }
+
+  .swallow:nth-child(1) {
+    top: 18%;
+    left: -50px;
+    animation-delay: 2s;
+    animation-duration: 16s;
+  }
+
+  .swallow:nth-child(2) {
+    top: 28%;
+    left: -60px;
+    animation-delay: 7s;
+    animation-duration: 19s;
+  }
+
+  .swallow:nth-child(3) {
+    top: 38%;
+    left: -45px;
+    animation-delay: 4s;
+    animation-duration: 17s;
+  }
+
+  @keyframes swallowFly {
+    0%   { transform:translate(0, 0) rotate(0deg); }
+    10%  { transform:translate(12vw, -25px) rotate(4deg); }
+    25%  { transform:translate(28vw, -55px) rotate(-6deg); }
+    40%  { transform:translate(45vw, -20px) rotate(5deg); }
+    55%  { transform:translate(60vw, -50px) rotate(-4deg); }
+    70%  { transform:translate(75vw, -30px) rotate(7deg); }
+    85%  { transform:translate(90vw, -45px) rotate(-2deg); }
+    100% { transform:translate(110vw, -10px) rotate(3deg); }
+  }
+
+  /* === 双人像 === */
+  .figures {
+    position: fixed;
+    bottom: clamp(50px, 9vh, 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    animation: figureFadeIn 2s ease-out 3.8s forwards;
+  }
+
+  .figures svg {
+    width: clamp(100px, 20vw, 150px);
+    height: auto;
+  }
+
+  @keyframes figureFadeIn {
+    from { opacity:0; transform:translateX(-50%) translateY(16px); }
+    to   { opacity:1; transform:translateX(-50%) translateY(0); }
+  }
+
+  /* === 明月 === */
+  .moon {
+    position: fixed;
+    top: 6%;
+    right: 10%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    animation: moonRise 2s ease-out 3.5s forwards;
+  }
+
+  .moon-disc {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(255,250,240,0.5) 0%, rgba(240,225,190,0.18) 50%, transparent 70%);
+    box-shadow:
+      0 0 30px rgba(255,245,220,0.25),
+      0 0 60px rgba(255,240,210,0.1),
+      0 0 100px rgba(240,220,180,0.06);
+  }
+
+  @keyframes moonRise {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* === 按钮区 === */
+  .controls {
+    position: fixed;
+    bottom: clamp(16px, 3vh, 28px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: 'Noto Serif SC', 'STKaiti', 'KaiTi', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(80,60,30,0.7);
+    background: rgba(245,240,230,0.6);
+    border: 0.6px solid rgba(139,119,90,0.3);
+    padding: 8px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.4s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .btn:hover {
+    color: rgba(44,36,22,0.9);
+    border-color: rgba(139,119,90,0.5);
+    background: rgba(245,240,230,0.8);
+  }
+
+  .btn:active {
+    transform: scale(0.96);
+    transition: transform 0.1s;
+  }
+
+  /* === 竖排模式 === */
+  .painting.vertical .poem {
+    writing-mode: vertical-rl;
+    flex-direction: row;
+    gap: 14px;
+    align-items: center;
+    max-height: 70vh;
+    max-height: 70dvh;
+    overflow-x: auto;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .painting.vertical .poem::-webkit-scrollbar { height:2px; }
+  .painting.vertical .poem::-webkit-scrollbar-thumb { background:rgba(139,119,90,0.2); border-radius:1px; }
+
+  .painting.vertical .poem-line {
+    font-size: 18px;
+    letter-spacing: 6px;
+  }
+
+  .painting.vertical .stanza-break {
+    width: 18px;
+    height: 0;
+  }
+
+  .painting.vertical .cipai-main {
+    writing-mode: vertical-rl;
+    font-size: 34px;
+    letter-spacing: 12px;
+  }
+
+  /* === 响应式 === */
+  @media (max-width:380px) {
+    .painting-content { padding: 50px 20px 40px; }
+    .cipai-main { font-size:32px; letter-spacing:8px; }
+    .poem-line { font-size:15.5px; letter-spacing:2px; }
+    .painting.vertical .poem-line { font-size:16.5px; letter-spacing:5px; }
+  }
+
+  @media (min-width:768px) {
+    .painting-content { padding: 80px 48px 60px; }
+    .poem-line { font-size:20px; letter-spacing:5px; }
+    .painting.vertical .poem-line { font-size:22px; letter-spacing:8px; }
+    .moon-disc { width:56px; height:56px; }
+    .cipai-main { font-size:44px; }
+  }
+
+  /* === 加载淡入 === */
+  @keyframes globalFadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 飘落花瓣 -->
+<div class="petals">
+  <span class="petal"><svg width="16" height="16" viewBox="0 0 16 16"><ellipse cx="6" cy="6" rx="4" ry="6" fill="#e8a0a4" transform="rotate(-20 6 6)" opacity="0.7"/><ellipse cx="10" cy="6" rx="4" ry="6" fill="#d4858a" transform="rotate(20 10 6)" opacity="0.7"/><ellipse cx="7" cy="9" rx="3" ry="5" fill="#c47078" transform="rotate(-50 7 9)" opacity="0.6"/><ellipse cx="9" cy="9" rx="3" ry="5" fill="#d08085" transform="rotate(50 9 9)" opacity="0.6"/><circle cx="8" cy="8" r="1.5" fill="#b86060" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="14" height="14" viewBox="0 0 14 14"><ellipse cx="5" cy="5" rx="3.5" ry="5" fill="#d4858a" transform="rotate(-15 5 5)" opacity="0.7"/><ellipse cx="9" cy="5" rx="3.5" ry="5" fill="#e0a0a5" transform="rotate(15 9 5)" opacity="0.7"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4.5" fill="#c47078" transform="rotate(-45 5.5 8)" opacity="0.6"/><ellipse cx="8.5" cy="8" rx="2.5" ry="4.5" fill="#cc7878" transform="rotate(45 8.5 8)" opacity="0.6"/><circle cx="7" cy="7" r="1.2" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="12" height="12" viewBox="0 0 12 12"><ellipse cx="4.5" cy="4.5" rx="3" ry="4.5" fill="#e8a0a4" transform="rotate(-25 4.5 4.5)" opacity="0.7"/><ellipse cx="7.5" cy="4.5" rx="3" ry="4.5" fill="#d4858a" transform="rotate(25 7.5 4.5)" opacity="0.7"/><circle cx="6" cy="6" r="1" fill="#b86060" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="15" height="15" viewBox="0 0 15 15"><ellipse cx="5.5" cy="5.5" rx="3.5" ry="5.5" fill="#d08085" transform="rotate(-18 5.5 5.5)" opacity="0.7"/><ellipse cx="9.5" cy="5.5" rx="3.5" ry="5.5" fill="#e8a8a8" transform="rotate(18 9.5 5.5)" opacity="0.7"/><ellipse cx="6" cy="8.5" rx="2.8" ry="4.5" fill="#c47078" transform="rotate(-40 6 8.5)" opacity="0.6"/><ellipse cx="9" cy="8.5" rx="2.8" ry="4.5" fill="#cc7878" transform="rotate(40 9 8.5)" opacity="0.6"/><circle cx="7.5" cy="7.5" r="1.3" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="13" height="13" viewBox="0 0 13 13"><ellipse cx="5" cy="5" rx="3.2" ry="5" fill="#d4858a" transform="rotate(-22 5 5)" opacity="0.7"/><ellipse cx="8" cy="5" rx="3.2" ry="5" fill="#e0a0a5" transform="rotate(22 8 5)" opacity="0.7"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4" fill="#c47078" transform="rotate(-38 5.5 8)" opacity="0.6"/><ellipse cx="7.5" cy="8" rx="2.5" ry="4" fill="#cc7878" transform="rotate(38 7.5 8)" opacity="0.6"/><circle cx="6.5" cy="6.5" r="1.1" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="17" height="17" viewBox="0 0 17 17"><ellipse cx="6.5" cy="6.5" rx="4.2" ry="6.5" fill="#e8a0a4" transform="rotate(-15 6.5 6.5)" opacity="0.65"/><ellipse cx="10.5" cy="6.5" rx="4.2" ry="6.5" fill="#d4858a" transform="rotate(15 10.5 6.5)" opacity="0.65"/><ellipse cx="7" cy="9.5" rx="3.2" ry="5.5" fill="#c47078" transform="rotate(-42 7 9.5)" opacity="0.55"/><ellipse cx="10" cy="9.5" rx="3.2" ry="5.5" fill="#cc7878" transform="rotate(42 10 9.5)" opacity="0.55"/><circle cx="8.5" cy="8.5" r="1.5" fill="#b86060" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="11" height="11" viewBox="0 0 11 11"><ellipse cx="4" cy="4" rx="2.8" ry="4.2" fill="#d08085" transform="rotate(-20 4 4)" opacity="0.7"/><ellipse cx="7" cy="4" rx="2.8" ry="4.2" fill="#e8a8a8" transform="rotate(20 7 4)" opacity="0.7"/><circle cx="5.5" cy="5.5" r="1" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="15" height="15" viewBox="0 0 15 15"><ellipse cx="5.5" cy="5.5" rx="3.8" ry="5.8" fill="#d4858a" transform="rotate(-12 5.5 5.5)" opacity="0.65"/><ellipse cx="9.5" cy="5.5" rx="3.8" ry="5.8" fill="#e0a0a5" transform="rotate(12 9.5 5.5)" opacity="0.65"/><circle cx="7.5" cy="7.5" r="1.3" fill="#a05050" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="14" height="14" viewBox="0 0 14 14"><ellipse cx="5" cy="5" rx="3.5" ry="5.2" fill="#e8a0a4" transform="rotate(-28 5 5)" opacity="0.7"/><ellipse cx="9" cy="5" rx="3.5" ry="5.2" fill="#cc7878" transform="rotate(28 9 5)" opacity="0.7"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4" fill="#c47078" transform="rotate(-45 5.5 8)" opacity="0.6"/><ellipse cx="8.5" cy="8" rx="2.5" ry="4" fill="#d08085" transform="rotate(45 8.5 8)" opacity="0.6"/><circle cx="7" cy="7" r="1.2" fill="#b86060" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="16" height="16" viewBox="0 0 16 16"><ellipse cx="6" cy="6" rx="4" ry="6" fill="#d08085" transform="rotate(-10 6 6)" opacity="0.65"/><ellipse cx="10" cy="6" rx="4" ry="6" fill="#e8a8a8" transform="rotate(10 10 6)" opacity="0.65"/><ellipse cx="7" cy="9" rx="3" ry="5" fill="#c47078" transform="rotate(-35 7 9)" opacity="0.55"/><ellipse cx="9" cy="9" rx="3" ry="5" fill="#cc7878" transform="rotate(35 9 9)" opacity="0.55"/><circle cx="8" cy="8" r="1.4" fill="#a05050" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="12" height="12" viewBox="0 0 12 12"><ellipse cx="4.5" cy="4.5" rx="3" ry="4.5" fill="#d4858a" transform="rotate(-30 4.5 4.5)" opacity="0.7"/><ellipse cx="7.5" cy="4.5" rx="3" ry="4.5" fill="#e0a0a5" transform="rotate(30 7.5 4.5)" opacity="0.7"/><circle cx="6" cy="6" r="1" fill="#b86060" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="13" height="13" viewBox="0 0 13 13"><ellipse cx="5" cy="5" rx="3.2" ry="5" fill="#e8a0a4" transform="rotate(-16 5 5)" opacity="0.7"/><ellipse cx="8" cy="5" rx="3.2" ry="5" fill="#d4858a" transform="rotate(16 8 5)" opacity="0.7"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4" fill="#c47078" transform="rotate(-48 5.5 8)" opacity="0.6"/><ellipse cx="7.5" cy="8" rx="2.5" ry="4" fill="#cc7878" transform="rotate(48 7.5 8)" opacity="0.6"/><circle cx="6.5" cy="6.5" r="1.1" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="15" height="15" viewBox="0 0 15 15"><ellipse cx="5.5" cy="5.5" rx="3.8" ry="5.5" fill="#d08085" transform="rotate(-20 5.5 5.5)" opacity="0.65"/><ellipse cx="9.5" cy="5.5" rx="3.8" ry="5.5" fill="#e0a0a5" transform="rotate(20 9.5 5.5)" opacity="0.65"/><circle cx="7.5" cy="7.5" r="1.3" fill="#b86060" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="11" height="11" viewBox="0 0 11 11"><ellipse cx="4" cy="4" rx="2.8" ry="4.2" fill="#d4858a" transform="rotate(-25 4 4)" opacity="0.7"/><ellipse cx="7" cy="4" rx="2.8" ry="4.2" fill="#e8a8a8" transform="rotate(25 7 4)" opacity="0.7"/><circle cx="5.5" cy="5.5" r="1" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="14" height="14" viewBox="0 0 14 14"><ellipse cx="5" cy="5" rx="3.5" ry="5.2" fill="#e8a0a4" transform="rotate(-15 5 5)" opacity="0.7"/><ellipse cx="9" cy="5" rx="3.5" ry="5.2" fill="#cc7878" transform="rotate(15 9 5)" opacity="0.7"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4" fill="#c47078" transform="rotate(-35 5.5 8)" opacity="0.6"/><ellipse cx="8.5" cy="8" rx="2.5" ry="4" fill="#d08085" transform="rotate(35 8.5 8)" opacity="0.6"/><circle cx="7" cy="7" r="1.2" fill="#b86060" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="16" height="16" viewBox="0 0 16 16"><ellipse cx="6" cy="6" rx="4" ry="6" fill="#d4858a" transform="rotate(-20 6 6)" opacity="0.6"/><ellipse cx="10" cy="6" rx="4" ry="6" fill="#e0a0a5" transform="rotate(20 10 6)" opacity="0.6"/><circle cx="8" cy="8" r="1.4" fill="#a05050" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="13" height="13" viewBox="0 0 13 13"><ellipse cx="5" cy="5" rx="3.2" ry="5" fill="#d08085" transform="rotate(-22 5 5)" opacity="0.65"/><ellipse cx="8" cy="5" rx="3.2" ry="5" fill="#e8a8a8" transform="rotate(22 8 5)" opacity="0.65"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4" fill="#c47078" transform="rotate(-40 5.5 8)" opacity="0.55"/><ellipse cx="7.5" cy="8" rx="2.5" ry="4" fill="#cc7878" transform="rotate(40 7.5 8)" opacity="0.55"/><circle cx="6.5" cy="6.5" r="1.1" fill="#a05050" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="15" height="15" viewBox="0 0 15 15"><ellipse cx="5.5" cy="5.5" rx="3.5" ry="5.5" fill="#e8a0a4" transform="rotate(-18 5.5 5.5)" opacity="0.65"/><ellipse cx="9.5" cy="5.5" rx="3.5" ry="5.5" fill="#d4858a" transform="rotate(18 9.5 5.5)" opacity="0.65"/><circle cx="7.5" cy="7.5" r="1.3" fill="#b86060" opacity="0.35"/></svg></span>
+  <span class="petal"><svg width="12" height="12" viewBox="0 0 12 12"><ellipse cx="4.5" cy="4.5" rx="3" ry="4.5" fill="#d4858a" transform="rotate(-28 4.5 4.5)" opacity="0.7"/><ellipse cx="7.5" cy="4.5" rx="3" ry="4.5" fill="#e0a0a5" transform="rotate(28 7.5 4.5)" opacity="0.7"/><circle cx="6" cy="6" r="1" fill="#a05050" opacity="0.4"/></svg></span>
+  <span class="petal"><svg width="14" height="14" viewBox="0 0 14 14"><ellipse cx="5" cy="5" rx="3.5" ry="5.2" fill="#d08085" transform="rotate(-12 5 5)" opacity="0.65"/><ellipse cx="9" cy="5" rx="3.5" ry="5.2" fill="#cc7878" transform="rotate(12 9 5)" opacity="0.65"/><ellipse cx="5.5" cy="8" rx="2.5" ry="4" fill="#c47078" transform="rotate(-30 5.5 8)" opacity="0.55"/><ellipse cx="8.5" cy="8" rx="2.5" ry="4" fill="#d08085" transform="rotate(30 8.5 8)" opacity="0.55"/><circle cx="7" cy="7" r="1.2" fill="#b86060" opacity="0.35"/></svg></span>
+</div>
+
+<!-- 双燕 -->
+<div class="swallows">
+  <div class="swallow">
+    <svg viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 14 Q30 6 20 12 Q18 13 20 14 Q24 8 36 14" fill="#2c2416"/>
+      <path d="M2 14 Q10 6 20 12 Q22 13 20 14 Q16 8 4 14" fill="#2c2416"/>
+      <path d="M20 14 Q22 18 26 20 Q24 17 20 14" fill="#2c2416"/>
+      <path d="M20 14 Q18 18 14 20 Q16 17 20 14" fill="#2c2416"/>
+      <circle cx="19" cy="13" r="0.8" fill="#2c2416"/>
+    </svg>
+  </div>
+  <div class="swallow">
+    <svg viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 14 Q30 6 20 12 Q18 13 20 14 Q24 8 36 14" fill="#2c2416"/>
+      <path d="M2 14 Q10 6 20 12 Q22 13 20 14 Q16 8 4 14" fill="#2c2416"/>
+      <path d="M20 14 Q22 18 26 20 Q24 17 20 14" fill="#2c2416"/>
+      <path d="M20 14 Q18 18 14 20 Q16 17 20 14" fill="#2c2416"/>
+      <circle cx="19" cy="13" r="0.8" fill="#2c2416"/>
+    </svg>
+  </div>
+  <div class="swallow">
+    <svg viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 14 Q30 6 20 12 Q18 13 20 14 Q24 8 36 14" fill="#2c2416"/>
+      <path d="M2 14 Q10 6 20 12 Q22 13 20 14 Q16 8 4 14" fill="#2c2416"/>
+      <path d="M20 14 Q22 18 26 20 Q24 17 20 14" fill="#2c2416"/>
+      <path d="M20 14 Q18 18 14 20 Q16 17 20 14" fill="#2c2416"/>
+      <circle cx="19" cy="13" r="0.8" fill="#2c2416"/>
+    </svg>
+  </div>
+</div>
+
+<!-- 明月 -->
+<div class="moon"><div class="moon-disc"></div></div>
+
+<!-- 双人像 -->
+<div class="figures">
+  <svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- 女子（左） -->
+    <g opacity="0.22" fill="#2c2416">
+      <!-- 头 -->
+      <ellipse cx="50" cy="18" rx="8" ry="9"/>
+      <!-- 发髻 -->
+      <ellipse cx="50" cy="8" rx="6" ry="7"/>
+      <path d="M46 4 Q50 0 54 4" fill="#2c2416"/>
+      <!-- 身体 -->
+      <path d="M38 28 Q36 55 34 80 Q34 95 36 110 L44 110 Q44 90 44 75 Q46 55 48 40 L50 40 Q50 55 52 70 L48 70 Q46 90 46 110 L56 110 Q58 95 56 75 Q54 50 52 28Z"/>
+      <!-- 衣袖（左） -->
+      <path d="M38 28 Q30 35 28 45 Q28 55 32 58 Q34 48 36 38Z"/>
+      <!-- 衣袖（右） -->
+      <path d="M52 28 Q60 32 62 42 Q62 50 58 54 Q58 44 54 36Z"/>
+      <!-- 披帛 -->
+      <path d="M30 40 Q36 48 40 42 Q44 50 48 44 Q52 52 56 46 Q60 38 62 30" stroke="#2c2416" stroke-width="1.5" fill="none" opacity="0.6"/>
+    </g>
+    <!-- 男子（右） -->
+    <g opacity="0.25" fill="#2c2416">
+      <!-- 头 -->
+      <ellipse cx="108" cy="18" rx="8.5" ry="9"/>
+      <!-- 幞头/帽子 -->
+      <rect x="100" y="7" width="16" height="5" rx="2"/>
+      <rect x="102" y="5" width="12" height="3" rx="1"/>
+      <!-- 身体 -->
+      <path d="M96 28 Q94 50 92 80 Q90 95 92 110 L100 110 Q102 90 102 75 Q104 55 106 40 L108 40 Q108 52 110 70 L106 70 Q104 90 104 110 L114 110 Q116 95 114 80 Q112 55 110 28Z"/>
+      <!-- 衣袖（左） -->
+      <path d="M96 28 Q88 35 86 48 Q84 58 90 58 Q88 48 92 38Z"/>
+      <!-- 衣袖（右） -->
+      <path d="M110 28 Q118 35 120 48 Q122 58 116 58 Q118 48 114 38Z"/>
+    </g>
+    <!-- 地面/石阶暗示 -->
+    <path d="M20 112 Q50 108 80 112 Q110 116 140 112" stroke="#2c2416" stroke-width="0.8" fill="none" opacity="0.12"/>
+  </svg>
+</div>
+
+  <!-- 主画心 -->
+  <div class="painting" id="painting">
+
+    <!-- 顶部水墨山水 -->
+    <div class="ink-mountains-top">
+      <svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="inkGrad1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3a3428" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#3a3428" stop-opacity="0.02"/>
+          </linearGradient>
+          <linearGradient id="inkGrad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2c2416" stop-opacity="0.16"/>
+            <stop offset="100%" stop-color="#2c2416" stop-opacity="0.03"/>
+          </linearGradient>
+          <linearGradient id="inkGrad3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a1410" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#1a1410" stop-opacity="0.02"/>
+          </linearGradient>
+          <linearGradient id="mist" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f5f0e6" stop-opacity="0.8"/>
+            <stop offset="20%" stop-color="#f5f0e6" stop-opacity="0.3"/>
+            <stop offset="80%" stop-color="#f5f0e6" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#f5f0e6" stop-opacity="0.8"/>
+          </linearGradient>
+        </defs>
+        <!-- 远山 -->
+        <path class="mountain" d="M0 100 Q40 40 80 75 Q120 30 160 65 Q200 20 240 60 Q280 15 320 55 Q360 25 420 50 L420 140 L0 140Z" fill="url(#inkGrad1)"/>
+        <!-- 中山 -->
+        <path class="mountain" d="M0 110 Q60 55 110 90 Q150 50 190 80 Q230 45 280 75 Q320 40 370 70 Q400 55 420 60 L420 140 L0 140Z" fill="url(#inkGrad2)"/>
+        <!-- 近山 -->
+        <path class="mountain" d="M0 130 Q50 85 100 110 Q150 80 200 105 Q250 75 310 100 Q360 80 420 95 L420 140 L0 140Z" fill="url(#inkGrad3)"/>
+        <!-- 薄雾 -->
+        <rect x="0" y="0" width="420" height="140" fill="url(#mist)"/>
+        <!-- 柳枝 -->
+        <g opacity="0.10">
+          <path d="M340 0 Q345 20 338 45 Q335 55 340 65" stroke="#3a3428" stroke-width="0.8" fill="none"/>
+          <path d="M338 20 Q330 28 325 35" stroke="#3a3428" stroke-width="0.6" fill="none"/>
+          <path d="M340 30 Q348 38 350 48" stroke="#3a3428" stroke-width="0.5" fill="none"/>
+          <path d="M338 45 Q330 52 326 60" stroke="#3a3428" stroke-width="0.5" fill="none"/>
+          <path d="M370 5 Q372 18 367 38 Q364 50 366 62" stroke="#3a3428" stroke-width="0.7" fill="none"/>
+          <path d="M366 25 Q358 32 354 42" stroke="#3a3428" stroke-width="0.5" fill="none"/>
+          <path d="M368 40 Q376 45 380 55" stroke="#3a3428" stroke-width="0.5" fill="none"/>
+        </g>
+        <!-- 飞鸟（远） -->
+        <g opacity="0.08">
+          <path d="M200 28 Q204 24 208 27" stroke="#2c2416" stroke-width="0.5" fill="none"/>
+          <path d="M215 22 Q219 18 223 21" stroke="#2c2416" stroke-width="0.5" fill="none"/>
+          <path d="M180 35 Q184 31 188 34" stroke="#2c2416" stroke-width="0.4" fill="none"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 内容居中容器 -->
+    <div class="painting-content">
+
+    <!-- 词牌名 -->
+    <div class="cipai">
+      <div class="cipai-main">临江仙</div>
+      <div class="cipai-sub">梦后楼台高锁</div>
+    </div>
+
+    <!-- 作者 -->
+    <div class="author">
+      <span class="author-text"><span class="dot"></span>宋 · 晏几道<span class="dot"></span></span>
+    </div>
+
+    <!-- 分隔 -->
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-diamond"></span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- 词文 -->
+    <div class="poem" id="poem">
+      <div class="poem-line">梦后楼台高锁，</div>
+      <div class="poem-line">酒醒帘幕低垂。</div>
+      <div class="poem-line">去年春恨却来时，</div>
+      <div class="poem-line famous">落花人独立，</div>
+      <div class="poem-line famous">微雨燕双飞。</div>
+      <div class="stanza-break"></div>
+      <div class="poem-line">记得小苹初见，</div>
+      <div class="poem-line">两重心字罗衣。</div>
+      <div class="poem-line">琵琶弦上说相思，</div>
+      <div class="poem-line">当时明月在，</div>
+      <div class="poem-line">曾照彩云归。</div>
+    </div>
+
+    <!-- 印章 -->
+    <div class="seal">
+      <div class="seal-stamp"><span class="seal-text">叔原</span></div>
+    </div>
+
+    </div><!-- .painting-content -->
+
+    <!-- 底部水墨 -->
+    <div class="ink-mountains-bot">
+      <svg viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="inkBot1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2c2416" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#2c2416" stop-opacity="0.01"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 30 Q50 10 110 35 Q170 5 230 28 Q290 8 340 32 Q380 15 420 25 L420 100 L0 100Z" fill="url(#inkBot1)"/>
+        <!-- 落花点缀 -->
+        <g opacity="0.06">
+          <circle cx="130" cy="55" r="1.5" fill="#6b5e4a"/>
+          <circle cx="180" cy="48" r="1" fill="#6b5e4a"/>
+          <circle cx="260" cy="60" r="1.8" fill="#6b5e4a"/>
+          <circle cx="310" cy="52" r="1.2" fill="#6b5e4a"/>
+        </g>
+      </svg>
+    </div>
+  </div><!-- .painting -->
+
+  <!-- 按钮 -->
+  <div class="controls">
+    <button class="btn" id="toggleBtn" onclick="toggleOrientation()">竖排 / 横排</button>
+    <button class="btn" onclick="resetAnim()">再看一遍</button>
+  </div>
+
+<script>
+  function toggleOrientation() {
+    document.getElementById('painting').classList.toggle('vertical');
+  }
+
+  function resetAnim() {
+    const p = document.getElementById('painting');
+    const poem = document.getElementById('poem');
+    const lines = poem.querySelectorAll('.poem-line, .stanza-break');
+    const animElements = p.querySelectorAll('.poem-line, .stanza-break, .cipai-main, .cipai-sub, .author-text, .divider, .seal, .ink-mountains-bot, .mountain');
+
+    animElements.forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 初始化微交互：点击词句加重显示
+    document.querySelectorAll('.poem-line').forEach(line => {
+      line.addEventListener('click', function() {
+        const wasActive = this.style.opacity === '1';
+        document.querySelectorAll('.poem-line').forEach(l => {
+          l.style.opacity = '0.88';
+          l.style.color = 'var(--ink)';
+          l.style.fontWeight = '350';
+        });
+        if (!wasActive) {
+          this.style.opacity = '1';
+          this.style.color = '#1a1008';
+          this.style.fontWeight = '500';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
